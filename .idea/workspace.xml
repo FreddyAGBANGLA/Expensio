@@ -5,8 +5,19 @@
       <config />
     </shared>
   </component>
+  <component name="BranchesTreeState">
+    <expand />
+    <select />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="83b74b56-2b20-44c2-a658-3bb7de6c5a35" name="Default Changelist" comment="" />
+    <list default="true" id="83b74b56-2b20-44c2-a658-3bb7de6c5a35" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/logo_E.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/logo_e.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/logo_E_1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -17,6 +28,18 @@
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
     </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -30,10 +53,14 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.17" />
-    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/drawable" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/res/drawable" />
     <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\USER\AndroidStudioProjects\Expensio\app\src\main\res\drawable" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration default="true" type="AndroidJUnit" factoryName="Android JUnit">
@@ -114,15 +141,18 @@
     </task>
     <servers />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
   <component name="WindowStateProjectService">
-    <state x="64" y="38" key="#PSD" timestamp="1619098875190">
-      <screen x="0" y="0" width="1093" height="584" />
-    </state>
-    <state x="64" y="38" key="#PSD/0.0.1093.584@0.0.1093.584" timestamp="1619098875190" />
     <state x="327" y="34" key="FileChooserDialogImpl" timestamp="1619091387684">
       <screen x="0" y="0" width="1093" height="584" />
     </state>
     <state x="327" y="34" key="FileChooserDialogImpl/0.0.1093.584@0.0.1093.584" timestamp="1619091387684" />
+    <state x="362" y="70" key="chooseDestDirectoryDialog" timestamp="1619103576449">
+      <screen x="0" y="0" width="1093" height="584" />
+    </state>
+    <state x="362" y="70" key="chooseDestDirectoryDialog/0.0.1093.584@0.0.1093.584" timestamp="1619103576449" />
     <state x="349" y="199" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1619093663547">
       <screen x="0" y="0" width="1093" height="584" />
     </state>
