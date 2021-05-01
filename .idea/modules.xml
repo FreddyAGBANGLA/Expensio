@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Expensio.iml" filepath="$PROJECT_DIR$/.idea/modules/Expensio.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/AndroidStudioProjects.Expensio.iml" filepath="$PROJECT_DIR$/.idea/modules/AndroidStudioProjects.Expensio.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Expensio.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Expensio.app.iml" />
     </modules>
   </component>

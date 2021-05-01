@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:showIn="navigation_view">
+
+    <group
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/drawer_home"
+            android:icon="@drawable/ic_accueil"
+            android:title="Acceuil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </group>
+
+    <item android:title="Configuration"
+        android:id="@+id/drawer_configuration"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content">
+
+        <menu
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <group android:checkableBehavior="single"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content">
+
+                <item
+                    android:id="@+id/drawer_profil"
+                    android:icon="@drawable/ic_profil"
+                    android:title="Profil"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <item
+                    android:id="@+id/drawer_settings"
+                    android:icon="@drawable/ic_parametres"
+                    android:title="Paramètres"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </group>
+
+        </menu>
+
+    </item>
+
+</menu>
