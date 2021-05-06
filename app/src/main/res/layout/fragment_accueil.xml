@@ -29,26 +29,26 @@
               app:layout_constraintVertical_bias="0.746"
               tools:ignore="MissingConstraints"
               tools:layout_editor_absoluteX="0dp" />
-
-          <ImageButton
+          <com.google.android.material.floatingactionbutton.FloatingActionButton
               android:id="@+id/button_revenu"
               android:layout_width="@dimen/button_width"
-              android:layout_height="@dimen/button_height"
+              android:layout_height="wrap_content"
               android:layout_gravity="center_horizontal"
               android:layout_margin="@dimen/margin_button"
+              android:background="@color/blue_logo"
               android:src="@drawable/ic_revenus"
               app:layout_constraintBottom_toBottomOf="parent"
               app:layout_constraintEnd_toEndOf="parent"
               app:layout_constraintHorizontal_bias="0.0"
               app:layout_constraintStart_toStartOf="parent"
               app:layout_constraintTop_toTopOf="parent"
-              app:layout_constraintVertical_bias="0.229"
+              app:layout_constraintVertical_bias="0.234"
               tools:ignore="MissingConstraints" />
-
-          <ImageButton
+          <com.google.android.material.floatingactionbutton.FloatingActionButton
               android:id="@+id/button_depense"
-              android:layout_width="@dimen/button_width"
-              android:layout_height="@dimen/button_height"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:background="@color/blue_logo"
               android:layout_gravity="center_horizontal"
               android:src="@drawable/ic_depense"
               app:layout_constraintBottom_toBottomOf="parent"
@@ -56,22 +56,22 @@
               app:layout_constraintHorizontal_bias="0.493"
               app:layout_constraintStart_toEndOf="@+id/button_revenu"
               app:layout_constraintTop_toTopOf="parent"
-              app:layout_constraintVertical_bias="0.278"
-              tools:ignore="MissingConstraints" />
+              app:layout_constraintVertical_bias="0.278" />
 
-          <ImageButton
+          <com.google.android.material.floatingactionbutton.FloatingActionButton
               android:id="@+id/button_transfert"
               android:layout_width="@dimen/button_width"
-              android:layout_height="@dimen/button_height"
+              android:layout_height="wrap_content"
               android:layout_gravity="center_horizontal"
               android:layout_margin="@dimen/margin_button"
+              android:background="@color/blue_logo"
               android:src="@drawable/ic_transfert"
               app:layout_constraintBottom_toBottomOf="parent"
               app:layout_constraintEnd_toEndOf="parent"
               app:layout_constraintHorizontal_bias="1.0"
               app:layout_constraintStart_toStartOf="parent"
               app:layout_constraintTop_toTopOf="parent"
-              app:layout_constraintVertical_bias="0.222"
+              app:layout_constraintVertical_bias="0.234"
               tools:ignore="MissingConstraints" />
 
      </androidx.constraintlayout.widget.ConstraintLayout>
