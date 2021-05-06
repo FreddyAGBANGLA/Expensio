@@ -63,6 +63,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             case R.id.drawer_profil:
                 break;
             case R.id.drawer_settings:
+                getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new SettingsFragment()).commit();
                 break;
             default:
                 break;
