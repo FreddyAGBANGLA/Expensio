@@ -95,4 +95,29 @@
     </string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="depenses">Dépenses</string>
+    <string name="valeur_initiale">0</string>
+    <string name="revenus">Revenus</string>
+    <string name="solde">Solde</string>
+    <string name="solde_mensuel">Solde mensuel</string>
+    <string name="breve_description">Donnez une brève description</string>
+    <string name="valider">Valider</string>
+    <string-array name="compte_array">
+        <item>Compte Mobile Money</item>
+        <item>Compte bancaire</item>
+        <item>Carte de crédit</item>
+        <item>Compte en ligne</item>
+        <item>Espèces</item>
+    </string-array>
+    <string-array name="categorie_array">
+        <item>Nourriture</item>
+        <item>Education</item>
+        <item>Animaux</item>
+        <item>Boissons</item>
+        <item>Vètements</item>
+        <item>Transport</item>
+        <item>Santé</item>
+        <item>Fun</item>
+        <item>Essence</item>
+    </string-array>
 </resources>
