@@ -9,4 +9,13 @@
     <color name="white">#FFFFFFFF</color>
     <color name="first_app_color">#459ed6</color>
     <color name="blue_logo">#459ed6</color>
+    <color name="red">#ff0000</color>
+    <color name="green">#00ff00</color>
+    <color name="blue">#0000bb</color>
+
+    <!-- Custum colors -->
+
+    <color name="dark_shadow">#CDD5EA</color>
+    <color name="light_shadow">#F8F9FE</color>
+    <color name="dark_icon">#212121</color>
 </resources>

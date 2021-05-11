@@ -9,8 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Expensio">
-        <activity android:name=".HomeActivity"/>
-        <activity android:name=".MainActivity">
+        <activity android:name=".revenus"></activity>
+        <activity android:name=".activity_depense" />
+        <activity android:name=".HomeActivity" />
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/FullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

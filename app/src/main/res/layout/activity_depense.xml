@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="500dp"
+    android:layout_gravity="center_vertical"
+    tools:context=".activity_depense">
+
+    <soup.neumorphism.NeumorphCardView
+        style="@style/NeumorphismCard"
+        android:layout_width="match_parent"
+        android:layout_height="108dp"
+        app:neumorph_shapeType="flat"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="51dp"/>
+
+    <TextView
+        android:id="@+id/depense_title"
+        android:fontFamily="@font/pepsi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/depenses"
+        android:textSize="60sp"
+        android:textColor="@color/blue_logo"
+        android:textStyle="bold"
+        android:layout_marginBottom="150dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.064" />
+
+    <soup.neumorphism.NeumorphCardView
+        style="@style/NeumorphismCard"
+        app:neumorph_shapeType="basin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/etn_montant"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:ems="10"
+        android:fontFamily="@font/pepsi"
+        android:gravity="end"
+        android:inputType="number"
+        android:text="0"
+        android:textAlignment="textEnd"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/depense_title"
+        app:layout_constraintVertical_bias="0.028" />
+
+    <Spinner
+        android:id="@+id/spinner_compte_depense"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="216dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <Spinner
+        android:id="@+id/spinner_categorie"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_compte_depense"
+        tools:ignore="MissingConstraints" />
+
+
+    <soup.neumorphism.NeumorphCardView
+        style="@style/NeumorphismCard"
+        app:neumorph_shapeType="basin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:fontFamily="@font/nasalization"
+        android:hint="@string/breve_description"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_categorie" />
+
+    <soup.neumorphism.NeumorphCardView
+        style="@style/NeumorphismCard"
+        app:neumorph_shapeType="flat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/valider"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:fontFamily="@font/nasalization"
+        android:text="@string/valider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/description" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

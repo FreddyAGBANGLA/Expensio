@@ -95,4 +95,11 @@
     </string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="solde_mensuel">Solde mensuel </string>
+    <string name="revenus">REVENUS </string>
+    <string name="valeur_initiale"> 0 </string>
+    <string name="depenses">DEPENSES</string>
+    <string name="solde">0</string>
+    <string name="breve_description">Donnez une brève Description</string>
+    <string name="valider">Valider</string>
 </resources>

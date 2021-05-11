@@ -1,91 +1,250 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AccueilFragment">
 
-     <!-- <TextView
-        android:id="@+id/long_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
-        android:text="@string/large_text" /> -->
-
 
      <androidx.constraintlayout.widget.ConstraintLayout
+         android:id="@+id/constraintLayout"
          android:layout_width="match_parent"
          android:layout_height="match_parent"
-         tools:layout_editor_absoluteX="191dp"
-         tools:layout_editor_absoluteY="-116dp">
+         tools:layout_editor_absoluteX="-16dp"
+         tools:layout_editor_absoluteY="-180dp">
+
 
           <Spinner
               android:id="@+id/spinner_compte"
-              android:layout_width="match_parent"
+              android:layout_width="300dp"
               android:layout_height="40dp"
-              app:layout_constraintBottom_toTopOf="@+id/button_depense"
-              app:layout_constraintTop_toTopOf="parent"
-              app:layout_constraintVertical_bias="0.746"
-              tools:ignore="MissingConstraints"
-              tools:layout_editor_absoluteX="0dp" />
-          <com.google.android.material.floatingactionbutton.FloatingActionButton
-              android:id="@+id/button_revenu"
-              android:layout_width="@dimen/button_width"
-              android:layout_height="wrap_content"
-              android:layout_gravity="center_horizontal"
-              android:layout_margin="@dimen/margin_button"
-              android:background="@color/blue_logo"
-              android:src="@drawable/ic_revenus"
-              app:layout_constraintBottom_toBottomOf="parent"
+              android:layout_marginTop="84dp"
               app:layout_constraintEnd_toEndOf="parent"
-              app:layout_constraintHorizontal_bias="0.0"
               app:layout_constraintStart_toStartOf="parent"
               app:layout_constraintTop_toTopOf="parent"
-              app:layout_constraintVertical_bias="0.234"
               tools:ignore="MissingConstraints" />
-          <com.google.android.material.floatingactionbutton.FloatingActionButton
-              android:id="@+id/button_depense"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:background="@color/blue_logo"
-              android:layout_gravity="center_horizontal"
-              android:src="@drawable/ic_depense"
-              app:layout_constraintBottom_toBottomOf="parent"
-              app:layout_constraintEnd_toStartOf="@+id/button_transfert"
-              app:layout_constraintHorizontal_bias="0.493"
-              app:layout_constraintStart_toEndOf="@+id/button_revenu"
-              app:layout_constraintTop_toTopOf="parent"
-              app:layout_constraintVertical_bias="0.278" />
 
-          <com.google.android.material.floatingactionbutton.FloatingActionButton
-              android:id="@+id/button_transfert"
-              android:layout_width="@dimen/button_width"
+          <LinearLayout
+              android:id="@+id/linearLayout"
+              android:layout_width="wrap_content"
+              android:layout_height="90dp"
+              android:layout_marginTop="40dp"
+              app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintTop_toBottomOf="@+id/spinner_compte"
+              tools:ignore="MissingConstraints"
+              android:orientation="horizontal">
+
+               <soup.neumorphism.NeumorphCardView
+                   style="@style/NeumorphismCard"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   app:neumorph_shadowColorDark="#818993"
+                   app:neumorph_shapeType="basin">
+                    <ImageButton
+                        android:id="@+id/button_revenu"
+                        android:layout_width="@dimen/button_width"
+                        android:layout_height="@dimen/button_height"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@color/green"
+                        android:src="@drawable/ic_revenus" />
+               </soup.neumorphism.NeumorphCardView>
+
+
+               <soup.neumorphism.NeumorphCardView
+                   style="@style/NeumorphismCard"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   app:neumorph_shadowColorDark="#818993"
+                   app:neumorph_shapeType="basin">
+
+                    <ImageButton
+                        android:id="@+id/button_depense"
+                        android:layout_width="@dimen/button_width"
+                        android:layout_height="@dimen/button_height"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@color/red"
+                        android:src="@drawable/ic_depense" />
+               </soup.neumorphism.NeumorphCardView>
+
+
+               <soup.neumorphism.NeumorphCardView
+                   style="@style/NeumorphismCard"
+                   app:neumorph_shapeType="basin"
+                   android:layout_width="match_parent"
+                   app:neumorph_shadowColorDark="#818993"
+                   android:layout_height="wrap_content">
+
+                    <ImageButton
+                        android:id="@+id/button_transfert"
+                        android:layout_width="@dimen/button_width"
+                        android:layout_height="@dimen/button_height"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@color/blue"
+                        android:src="@drawable/ic_transfert" />
+               </soup.neumorphism.NeumorphCardView>
+
+
+          </LinearLayout>
+
+          <LinearLayout
+              android:id="@+id/linearLayout2"
+              android:layout_width="250dp"
               android:layout_height="wrap_content"
-              android:layout_gravity="center_horizontal"
-              android:layout_margin="@dimen/margin_button"
-              android:background="@color/blue_logo"
-              android:src="@drawable/ic_transfert"
+              android:layout_margin="10dp"
+              android:orientation="vertical"
               app:layout_constraintBottom_toBottomOf="parent"
               app:layout_constraintEnd_toEndOf="parent"
-              app:layout_constraintHorizontal_bias="1.0"
+              app:layout_constraintHorizontal_bias="0.503"
               app:layout_constraintStart_toStartOf="parent"
-              app:layout_constraintTop_toTopOf="parent"
-              app:layout_constraintVertical_bias="0.234"
-              tools:ignore="MissingConstraints" />
+              app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+              app:layout_constraintVertical_bias="0.179"
+              tools:ignore="MissingConstraints">
+
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content">
+
+                    <soup.neumorphism.NeumorphCardView
+                        style="@style/NeumorphismCard"
+                        app:neumorph_shapeType="flat"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="@string/solde_mensuel"
+                        android:fontFamily="@font/pepsi"
+                        android:textColor="@color/blue_logo"
+                        android:textAlignment="center"
+                        android:textSize="30sp"
+                        android:textStyle="bold" />
+
+                    </soup.neumorphism.NeumorphCardView>
+
+               </LinearLayout>
+
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="50dp"
+                   android:orientation="horizontal">
+
+                    <soup.neumorphism.NeumorphCardView
+                        style="@style/NeumorphismCard"
+                        app:neumorph_shapeType="basin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/revenus_label"
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:fontFamily="@font/nasalization"
+                        android:text="@string/revenus" />
+                    </soup.neumorphism.NeumorphCardView>
+
+                    <soup.neumorphism.NeumorphCardView
+                        style="@style/NeumorphismCard"
+                        app:neumorph_shapeType="basin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent">
+                    <TextView
+                        android:id="@+id/revenus"
+                        android:layout_width="125dp"
+                        android:fontFamily="@font/nasalization"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="@string/valeur_initiale"/>
+                    </soup.neumorphism.NeumorphCardView>
+
+
+               </LinearLayout>
+
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="50dp"
+                   android:orientation="horizontal">
+
+                    <soup.neumorphism.NeumorphCardView
+                        style="@style/NeumorphismCard"
+                        app:neumorph_shapeType="basin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/depenses_label"
+                        android:layout_width="100dp"
+                        android:fontFamily="@font/nasalization"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="@string/depenses" />
+                    </soup.neumorphism.NeumorphCardView>
+
+                    <soup.neumorphism.NeumorphCardView
+                        style="@style/NeumorphismCard"
+                        app:neumorph_shapeType="basin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/depenses"
+                        android:layout_width="125dp"
+                        android:fontFamily="@font/nasalization"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="@string/valeur_initiale" />
+
+                    </soup.neumorphism.NeumorphCardView>
+
+               </LinearLayout>
+
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="50dp"
+                   android:orientation="horizontal">
+
+                    <soup.neumorphism.NeumorphCardView
+                        style="@style/NeumorphismCard"
+                        app:neumorph_shapeType="basin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/solde_label"
+                        android:layout_width="100dp"
+                        android:fontFamily="@font/nasalization"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="@string/solde"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    </soup.neumorphism.NeumorphCardView>
+
+                    <soup.neumorphism.NeumorphCardView
+                        style="@style/NeumorphismCard"
+                        app:neumorph_shapeType="basin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/solde"
+                        android:layout_width="125dp"
+                        android:fontFamily="@font/nasalization"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="@string/valeur_initiale" />
+
+                    </soup.neumorphism.NeumorphCardView>
+               </LinearLayout>
+
+          </LinearLayout>
+
 
      </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-     <!-- <LinearLayout
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content"
-          android:orientation="horizontal"
-         android:layout_gravity="center_vertical">
-
-
-
-     </LinearLayout> -->
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
