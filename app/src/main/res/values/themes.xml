@@ -68,6 +68,13 @@
         <item name="neumorph_cornerSizeBottomRight">16dp</item>
     </style>
 
+    <style name="NeumorphismTextView">
+        <item name="neumorph_cornerFamily">rounded</item>
+        <item name="neumorph_cornerSizeTopLeft">16dp</item>
+        <item name="neumorph_cornerSizeTopRight">16dp</item>
+        <item name="neumorph_cornerSizeBottomLeft">1dp</item>
+        <item name="neumorph_cornerSizeBottomRight">16dp</item>
+    </style>
     <style name="TextAppearance.FontPath" parent="android:TextAppearance">
         <item name="fontPath">font/pepsi.ttf</item>
     </style>

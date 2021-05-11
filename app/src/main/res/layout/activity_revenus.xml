@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".revenus">
+    tools:context=".RevenusActivity">
 
     <soup.neumorphism.NeumorphCardView
         style="@style/NeumorphismCard"
@@ -77,17 +77,54 @@
         app:layout_constraintTop_toBottomOf="@+id/spinner_compte_depense"
         tools:ignore="MissingConstraints" />
 
-    <DatePicker
-        android:id = "@+id/simpleDatePicker"
-        android:layout_width = "wrap_content"
-        android:layout_height = "wrap_content"
-        android:datePickerMode = "spinner"
-        android:endYear="2021"
-        android:startYear="2000"
-        app:layout_constraintTop_toBottomOf="@id/spinner_categorie"
+    <soup.neumorphism.NeumorphCardView
+        android:id="@+id/bloc_date"
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        android:layout_marginTop="40dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constrainnthorizontalBias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_categorie"
+        app:neumorph_shapeType="pressed"
+        tools:ignore="MissingConstraints">
+    <EditText
+        android:id="@+id/date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Selectionnez la Date..."
+        android:paddingTop="30dp"
+        android:paddingLeft="10dp"
+        android:textColorHint="@color/blue_logo"
+        android:textSize="10sp"
+        android:fontFamily="@font/nasalization"
+        android:textAlignment="textEnd"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_categorie"
         tools:ignore="MissingConstraints" />
+    </soup.neumorphism.NeumorphCardView>
+
+    <soup.neumorphism.NeumorphCardView
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bloc_date"
+        app:neumorph_shapeType="pressed"
+        tools:ignore="MissingConstraints">
+        <EditText
+            android:id="@+id/year"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Selectionnez l'Heure..."
+            android:paddingTop="30dp"
+            android:paddingLeft="10dp"
+            android:textColorHint="@color/blue_logo"
+            android:textSize="10sp"
+            android:fontFamily="@font/nasalization"
+            android:textAlignment="textEnd"
+            app:layout_constraintTop_toBottomOf="@id/bloc_date"
+            tools:ignore="MissingConstraints" />
+    </soup.neumorphism.NeumorphCardView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
