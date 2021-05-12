@@ -2,6 +2,7 @@ package com.example.expensio;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.View;
@@ -31,13 +32,11 @@ public class RevenusActivity extends AppCompatActivity {
                 // date picker dialog
                 datePickerDialog = new DatePickerDialog(RevenusActivity.this,
                         new DatePickerDialog.OnDateSetListener() {
+                            @SuppressLint("SetTextI18n")
                             @Override
-                            public void onDateSet(DatePicker view, int year,
-                                                  int monthOfYear, int dayOfMonth) {
+                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                                 // set day of month , month and year value in the edit text
-                                date.setText(dayOfMonth + "/"
-                                        + (monthOfYear + 1) + "/" + year);
-
+                                date.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
                             }
                         }, mYear, mMonth, mDay);
                 datePickerDialog.show();
