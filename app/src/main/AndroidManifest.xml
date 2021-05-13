@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.expensio">
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/e_192"
@@ -8,11 +9,13 @@
         android:roundIcon="@drawable/e_192"
         android:supportsRtl="true"
         android:theme="@style/Theme.Expensio">
-        <activity android:name=".RevenusActivity"></activity>
+        <activity android:name=".TransfertActivity"></activity>
+        <activity android:name=".RevenusActivity" />
         <activity android:name=".DepenseActivity" />
         <activity android:name=".HomeActivity" />
         <activity
             android:name=".MainActivity"
+            android:banner="@font/pepsi"
             android:theme="@style/FullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -71,7 +71,8 @@ public class AccueilFragment extends Fragment {
         IB_transfert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(view.getContext(), TransfertActivity.class);
+                startActivity(intent);
             }
         });
 

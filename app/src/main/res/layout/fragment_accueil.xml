@@ -44,6 +44,7 @@
                    android:layout_height="@dimen/button_height"
                    app:neumorph_backgroundColor="@color/green"
                    app:neumorph_shapeType="flat"
+                   app:neumorph_shadowElevation="6dp"
                    android:layout_gravity="center_horizontal"
                    android:src="@drawable/ic_revenus" />
 
@@ -53,16 +54,18 @@
                    android:layout_width="@dimen/button_width"
                    android:layout_height="@dimen/button_height"
                    app:neumorph_shapeType="flat"
+                   app:neumorph_shadowElevation="6dp"
                    android:layout_gravity="center_horizontal"
                    app:neumorph_backgroundColor="@color/red"
                    android:src="@drawable/ic_depense" />
 
                <soup.neumorphism.NeumorphImageButton
                    style="@style/Widget.Neumorph.ImageButton"
+                   android:id="@+id/button_transfert"
                    app:neumorph_shapeType="flat"
                    android:layout_width="@dimen/button_width"
                    android:layout_height="@dimen/button_height"
-                   android:id="@+id/button_transfert"
+                   app:neumorph_shadowElevation="6dp"
                    android:layout_gravity="center_horizontal"
                    app:neumorph_backgroundColor="@color/blue"
                    android:src="@drawable/ic_transfert" />

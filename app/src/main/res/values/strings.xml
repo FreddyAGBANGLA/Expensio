@@ -99,6 +99,7 @@
     <string name="revenus">REVENUS </string>
     <string name="valeur_initiale"> 0 </string>
     <string name="depenses">DEPENSES</string>
+    <string name="transfert">TRANSFERT</string>
     <string name="solde">Solde</string>
     <string name="breve_description">Donnez une brève Description</string>
     <string name="valider">Valider</string>
