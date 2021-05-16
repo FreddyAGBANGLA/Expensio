@@ -111,7 +111,7 @@
         <item>Compte en ligne</item>
         <item>Espèces</item>
     </string-array>
-    <string-array name="categorie_array">
+    <string-array name="categorie_array_depense">
         <item>Nourriture</item>
         <item>Education</item>
         <item>Animaux</item>
@@ -121,5 +121,14 @@
         <item>Santé</item>
         <item>Fun</item>
         <item>Essence</item>
+        <item>Prêt</item>
+    </string-array>
+    <string-array name="categorie_array_revenu">
+        <item>Salaire</item>
+        <item>Ventes</item>
+        <item>Emprunt</item>
+        <item>Cryptomonnaie</item>
+        <item>Dividendes</item>
+        <item>Intérêts</item>
     </string-array>
 </resources>
