@@ -15,16 +15,22 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.expensio.Model.Compte;
+import com.example.expensio.Utils.GestDataBase;
+
 import java.util.Calendar;
 
 import soup.neumorphism.NeumorphButton;
 
 public class DepenseActivity extends AppCompatActivity {
+    GestDataBase myDB;
     EditText date, time, etn_montant;
     NeumorphButton IB_valider;
     DatePickerDialog datePickerDialog;
     TimePickerDialog timePickerDialog;
-    int Solde, Revenus, Depenses;
+    Spinner spinner_compte, spinner_categorie_depense;
+    String selectedCompte;
+    int Solde = 0, Revenus = 0, Depenses = 0;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -32,6 +38,9 @@ public class DepenseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_depense);
 
+        myDB = new GestDataBase(this);
+
+        /*
         Intent intent_receive = getIntent();
         if(intent_receive != null){
             if(intent_receive.hasExtra("solde")
@@ -42,6 +51,9 @@ public class DepenseActivity extends AppCompatActivity {
                 Depenses = Integer.parseInt(intent_receive.getStringExtra("depense"));
             }
         }
+
+         */
+
 
         // calender class's instance and get current date, month, year, hour and minute from calender
         final Calendar c = Calendar.getInstance();
@@ -69,10 +81,10 @@ public class DepenseActivity extends AppCompatActivity {
         IB_valider = findViewById(R.id.btn_valider);
 
         // Initialisation du spinner des comptes
-        Spinner spinner_compte = findViewById(R.id.spinner_compte);
+        spinner_compte = findViewById(R.id.spinner_compte);
 
         // Initialisation du spinner des categories de depenses
-        Spinner spinner_categorie_depense = findViewById(R.id.spinner_categorie_depense);
+        spinner_categorie_depense = findViewById(R.id.spinner_categorie_depense);
 
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter_compte = ArrayAdapter.createFromResource(getApplicationContext(),
@@ -81,10 +93,18 @@ public class DepenseActivity extends AppCompatActivity {
         adapter_compte.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
         spinner_compte.setAdapter(adapter_compte);
+        selectedCompte = spinner_compte.getItemAtPosition(spinner_compte.getFirstVisiblePosition()).toString();
+
         AdapterView.OnItemSelectedListener l_compte = new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+                selectedCompte = parent.getItemAtPosition(position).toString();
+                Compte compte = myDB.get_solde_compte(selectedCompte);
+                if (compte == null)
+                    return;
+                Solde = compte.getSolde_compte();
+                Revenus = compte.getRevenu_compte();
+                Depenses = compte.getDepense_compte();
             }
 
             @Override
@@ -156,18 +176,38 @@ public class DepenseActivity extends AppCompatActivity {
             }
             else{
                 int depense = Integer.parseInt(montant_depense);
+                if (depense > Solde){
+                    Toast toast = Toast.makeText(getApplicationContext(), "Votre solde est insuffisant", Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.BOTTOM, 0, 0);
+                    toast.show();
+                    etn_montant.setText("0");
+                    return;
+                }
                 Depenses += depense;
                 Solde -= depense;
 
                 Intent intent_send = new Intent(getApplicationContext(), HomeActivity.class);
                 intent_send.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
+                Boolean checkupdatedata = myDB.update_solde_compte(selectedCompte, Solde, Revenus, Depenses);
+                if(!checkupdatedata){
+                    Compte compte = new Compte();
+                    compte.setNom_compte(selectedCompte);
+                    compte.setSolde_compte(Solde);
+                    compte.setRevenu_compte(Revenus);
+                    compte.setDepense_compte(Depenses);
+                    myDB.insert_compte(compte);
+                }
+
+                /*
                 // Bundle is optional
                 Bundle bundle = new Bundle();
                 bundle.putString("solde", String.valueOf(Solde));
                 bundle.putString("revenu", String.valueOf(Revenus));
                 bundle.putString("depense", String.valueOf(Depenses));
                 intent_send.putExtras(bundle);
+
+                 */
 
                 startActivity(intent_send);
                 finish();
