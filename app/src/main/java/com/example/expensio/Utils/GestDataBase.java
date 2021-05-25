@@ -44,9 +44,9 @@ public class GestDataBase extends SQLiteOpenHelper {
         db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(COL_1, compte.getNom_compte());
-        values.put(COL_2, 0);
-        values.put(COL_3, 0);
-        values.put(COL_4, 0);
+        values.put(COL_2, compte.getSolde_compte());
+        values.put(COL_3, compte.getRevenu_compte());
+        values.put(COL_4, compte.getDepense_compte());
         long result = db.insert(TABLE_NAME, null, values);
         if (result == -1)
             return false;
