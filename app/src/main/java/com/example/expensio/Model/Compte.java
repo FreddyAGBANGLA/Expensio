@@ -2,10 +2,10 @@ package com.example.expensio.Model;
 
 public class Compte {
 
-    private String nom_compte;
-    private int solde_compte;
-    private int revenu_compte;
-    private int depense_compte;
+    private String nom_compte = "";
+    private int solde_compte = 0;
+    private int revenu_compte = 0;
+    private int depense_compte = 0;
 
     public String getNom_compte() {
         return nom_compte;

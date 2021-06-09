@@ -11,9 +11,19 @@
      <androidx.constraintlayout.widget.ConstraintLayout
          android:id="@+id/constraintLayout"
          android:layout_width="match_parent"
-         android:layout_height="match_parent"
+         android:layout_height="wrap_content"
          tools:layout_editor_absoluteX="16dp"
          tools:layout_editor_absoluteY="180dp">
+
+          <soup.neumorphism.NeumorphCardView
+              android:id="@+id/neumorphCardView"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintTop_toTopOf="parent">
+
+          </soup.neumorphism.NeumorphCardView>
 
 
           <Spinner
@@ -227,6 +237,21 @@
                </LinearLayout>
 
           </LinearLayout>
+
+          <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginBottom="21dp"
+              android:fontFamily="@font/nasalization"
+              android:gravity="center"
+              android:text="@string/title_spinner_compte"
+              android:textColor="@color/first_app_color"
+              android:textAlignment="center"
+              android:textSize="25sp"
+              android:textStyle="bold"
+              app:layout_constraintBottom_toTopOf="@+id/spinner_compte"
+              app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintStart_toStartOf="parent" />
 
 
      </androidx.constraintlayout.widget.ConstraintLayout>

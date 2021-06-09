@@ -8,22 +8,27 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.expensio.Model.Compte;
-import com.example.expensio.Utils.GestDataBase;
+import com.example.expensio.Model.Revenu;
+import com.example.expensio.Utils.DBCompteAdapter;
+import com.example.expensio.Utils.DBRevenuAdapter;
 
-import soup.neumorphism.NeumorphCardView;
+import java.util.ArrayList;
+import java.util.List;
+
 import soup.neumorphism.NeumorphImageButton;
 
 public class AccueilFragment extends Fragment {
-    GestDataBase myDB;
+    DBCompteAdapter myDBCompte = null;
     NeumorphImageButton IB_revenu, IB_depense, IB_transfert;
     TextView tv_revenu, tv_depense, tv_solde;
     Spinner spinner;
@@ -35,38 +40,13 @@ public class AccueilFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_accueil, container, false);
 
-        myDB = new GestDataBase(view.getContext());
+        myDBCompte = new DBCompteAdapter(view.getContext());
 
         tv_revenu = view.findViewById(R.id.revenus);
         tv_depense = view.findViewById(R.id.depenses);
         tv_solde = view.findViewById(R.id.solde);
 
-
-        /*
-        Intent intent_receive = getActivity().getIntent();
-        if(intent_receive != null){
-            if(intent_receive.hasExtra("solde")
-                    && intent_receive.hasExtra("revenu")
-                    && intent_receive.hasExtra("depense")){
-                tv_solde.setText(intent_receive.getStringExtra("solde"));
-                tv_revenu.setText(intent_receive.getStringExtra("revenu"));
-                tv_depense.setText(intent_receive.getStringExtra("depense"));
-            }
-        }
-
-         */
-
-
         spinner = (Spinner) view.findViewById(R.id.spinner_compte);
-
-        /*
-        selectedCompte = spinner.getItemAtPosition(spinner.getFirstVisiblePosition()).toString();
-        Solde = myDB.get_solde_compte(selectedCompte);
-        tv_solde.setText(String.valueOf(Solde));
-
-         */
-
-
 
         //variables neumorphiques
 
@@ -76,7 +56,7 @@ public class AccueilFragment extends Fragment {
 
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(view.getContext(),
-                R.array.compte_array, android.R.layout.simple_spinner_item);
+                R.array.compte_array1, android.R.layout.simple_spinner_item);
         // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
@@ -85,7 +65,7 @@ public class AccueilFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 selectedCompte = parent.getItemAtPosition(position).toString();
-                Compte compte = myDB.get_solde_compte(selectedCompte);
+                Compte compte = myDBCompte.get_solde_compte(selectedCompte);
                 if (compte == null)
                     return;
                 tv_solde.setText(String.valueOf(compte.getSolde_compte()));
@@ -105,16 +85,6 @@ public class AccueilFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(view.getContext(), RevenusActivity.class);
-
-                /*
-                Bundle bundle = new Bundle();
-                bundle.putString("solde", tv_solde.getText().toString());
-                bundle.putString("revenu", tv_revenu.getText().toString());
-                bundle.putString("depense", tv_depense.getText().toString());
-                intent.putExtras(bundle);
-
-                 */
-
                 startActivity(intent);
             }
         });
@@ -123,16 +93,6 @@ public class AccueilFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(view.getContext(), DepenseActivity.class);
-
-                /*
-                Bundle bundle = new Bundle();
-                bundle.putString("solde", tv_solde.getText().toString());
-                bundle.putString("revenu", tv_revenu.getText().toString());
-                bundle.putString("depense", tv_depense.getText().toString());
-                intent.putExtras(bundle);
-
-                 */
-
                 startActivity(intent);
             }
         });
@@ -141,16 +101,6 @@ public class AccueilFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent_send = new Intent(view.getContext(), TransfertActivity.class);
-
-                /*
-                Bundle bundle = new Bundle();
-                bundle.putString("solde", tv_solde.getText().toString());
-                bundle.putString("revenu", tv_revenu.getText().toString());
-                bundle.putString("depense", tv_depense.getText().toString());
-                intent_send.putExtras(bundle);
-
-                 */
-
                 startActivity(intent_send);
             }
         });

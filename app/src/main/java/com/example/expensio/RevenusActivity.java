@@ -16,20 +16,25 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.expensio.Model.Compte;
-import com.example.expensio.Utils.GestDataBase;
+import com.example.expensio.Model.Revenu;
+import com.example.expensio.Utils.DBCompteAdapter;
+import com.example.expensio.Utils.DBRevenuAdapter;
 
 import java.util.Calendar;
 
 import soup.neumorphism.NeumorphButton;
 
 public class RevenusActivity extends AppCompatActivity {
-    GestDataBase myDB;
-    EditText date, time, etn_montant;
+    DBCompteAdapter myDBCompte = null;
+    DBRevenuAdapter myDBRevenu = null;
+    EditText date, time, etn_montant, description;
     NeumorphButton IB_valider;
     DatePickerDialog datePickerDialog;
     TimePickerDialog timePickerDialog;
-    String selectedCompte;
+    Spinner spinner_compte, spinner_categorie_revenu;
+    String selectedCompte, selectedCategorie, globaCompte = "Compte Global";
     int Solde = 0, Revenus = 0, Depenses = 0;
+    int globaSolde = 0, globaRevenus = 0, globaDepenses = 0;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -37,21 +42,8 @@ public class RevenusActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_revenus);
 
-        myDB = new GestDataBase(this);
-
-        /*
-        Intent intent_receive = getIntent();
-        if(intent_receive != null){
-            if(intent_receive.hasExtra("solde")
-                    && intent_receive.hasExtra("revenu")
-                    && intent_receive.hasExtra("depense")){
-                Solde = Integer.parseInt(intent_receive.getStringExtra("solde"));
-                Revenus = Integer.parseInt(intent_receive.getStringExtra("revenu"));
-                Depenses = Integer.parseInt(intent_receive.getStringExtra("depense"));
-            }
-        }
-
-         */
+        myDBCompte = new DBCompteAdapter(this);
+        myDBRevenu = new DBRevenuAdapter(this);
 
         // calender class's instance and get current date, month, year, hour and minute from calender
         final Calendar c = Calendar.getInstance();
@@ -63,6 +55,9 @@ public class RevenusActivity extends AppCompatActivity {
 
         // initialiser l'EditText etn_montant
         etn_montant = findViewById(R.id.etn_montant);
+
+        // initialiser l'EditText description
+        description = findViewById(R.id.description);
 
         // initiate the date picker and a button
         date = findViewById(R.id.date);
@@ -79,10 +74,10 @@ public class RevenusActivity extends AppCompatActivity {
         IB_valider = findViewById(R.id.btn_valider);
 
         // Initialisation du spinner des comptes
-        Spinner spinner_compte = findViewById(R.id.spinner_compte);
+        spinner_compte = findViewById(R.id.spinner_compte);
 
         // Initialisation du spinner des categories de revenus
-        Spinner spinner_categorie_revenu = findViewById(R.id.spinner_categorie_revenu);
+        spinner_categorie_revenu = findViewById(R.id.spinner_categorie_revenu);
 
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter_compte = ArrayAdapter.createFromResource(getApplicationContext(),
@@ -97,12 +92,18 @@ public class RevenusActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 selectedCompte = parent.getItemAtPosition(position).toString();
-                Compte compte = myDB.get_solde_compte(selectedCompte);
+                Compte compte = myDBCompte.get_solde_compte(selectedCompte);
                 if (compte == null)
                     return;
                 Solde = compte.getSolde_compte();
                 Revenus = compte.getRevenu_compte();
                 Depenses = compte.getDepense_compte();
+                Compte compteGlobal = myDBCompte.get_solde_compte(globaCompte);
+                if(compteGlobal == null)
+                    return;
+                globaSolde = compteGlobal.getSolde_compte();
+                globaRevenus = compteGlobal.getRevenu_compte();
+                globaDepenses = compteGlobal.getDepense_compte();
             }
 
             @Override
@@ -123,7 +124,7 @@ public class RevenusActivity extends AppCompatActivity {
         AdapterView.OnItemSelectedListener l_categorie = new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+                selectedCategorie = parent.getItemAtPosition(position).toString();
             }
 
             @Override
@@ -171,35 +172,38 @@ public class RevenusActivity extends AppCompatActivity {
                 Toast toast = Toast.makeText(getApplicationContext(), "Entrez un montant valide", Toast.LENGTH_SHORT);
                 toast.setGravity(Gravity.BOTTOM, 0, 0);
                 toast.show();
+                etn_montant.setText("");
+            }
+            else if(description.getText().toString().equals("")){
+                Toast toast = Toast.makeText(getApplicationContext(), "Entrez une brève description", Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.BOTTOM, 0, 0);
+                toast.show();
             }
             else{
                 int revenu = Integer.parseInt(montant_revenu);
                 Revenus += revenu;
                 Solde += revenu;
+                globaRevenus += revenu;
+                globaSolde += revenu;
+
+                Revenu revenu1 = new Revenu();
+                revenu1.setMontant(revenu);
+                revenu1.setCategorie(selectedCategorie);
+                revenu1.setDate(date.getText().toString());
+                revenu1.setHeure(time.getText().toString());
+                revenu1.setDesc(description.getText().toString());
+                revenu1.setNom_compte(selectedCompte);
 
                 Intent intent_send = new Intent(getApplicationContext(), HomeActivity.class);
                 intent_send.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
-                Boolean checkupdatedata = myDB.update_solde_compte(selectedCompte, Solde, Revenus, Depenses);
-                if(!checkupdatedata){
-                    Compte compte = new Compte();
-                    compte.setNom_compte(selectedCompte);
-                    compte.setSolde_compte(Solde);
-                    compte.setRevenu_compte(Revenus);
-                    compte.setDepense_compte(Depenses);
-                    myDB.insert_compte(compte);
-                }
+                myDBCompte.update_solde_compte(selectedCompte, Solde, Revenus, Depenses);
+                myDBCompte.update_solde_compte(globaCompte, globaSolde, globaRevenus, globaDepenses);
+                myDBRevenu.insert_revenu(revenu1);
 
-                /*
-                // Bundle is optional
-                Bundle bundle = new Bundle();
-                bundle.putString("solde", String.valueOf(Solde));
-                bundle.putString("revenu", String.valueOf(Revenus));
-                bundle.putString("depense", String.valueOf(Depenses));
-                intent_send.putExtras(bundle);
-
-                 */
-
+                Toast toast = Toast.makeText(getApplicationContext(), "Données sauvegardées avec succès !", Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.BOTTOM, 0, 0);
+                toast.show();
 
                 startActivity(intent_send);
                 finish();

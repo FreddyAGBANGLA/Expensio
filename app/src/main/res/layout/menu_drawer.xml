@@ -17,6 +17,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
+        <item
+            android:id="@+id/drawer_history"
+            android:icon="@drawable/ic_history"
+            android:title="Historique"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
     </group>
 
     <item android:title="Configuration"

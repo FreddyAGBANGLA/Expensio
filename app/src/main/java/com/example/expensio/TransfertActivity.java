@@ -15,16 +15,27 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.expensio.Model.Compte;
+import com.example.expensio.Model.Transfert;
+import com.example.expensio.Utils.DBCompteAdapter;
+import com.example.expensio.Utils.DBTransfertAdapter;
+import com.example.expensio.Utils.GestDataBaseAdapter;
+
 import java.util.Calendar;
 
 import soup.neumorphism.NeumorphButton;
 
 public class TransfertActivity extends AppCompatActivity {
-    EditText date, time, etn_montant;
+    DBCompteAdapter myDBCompte = null;
+    DBTransfertAdapter myDBTransfert = null;
+    EditText date, time, etn_montant, description;
     NeumorphButton IB_valider;
     DatePickerDialog datePickerDialog;
     TimePickerDialog timePickerDialog;
-    int Solde, Revenus, Depenses;
+    Spinner spinner_compte_source, spinner_compte_destination;
+    String selectedCompteSource, selectedCompteDestination;
+    int SoldeSource = 0, RevenusSource = 0, DepensesSource = 0;
+    int SoldeDestination = 0, RevenusDestination = 0, DepensesDestination = 0;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -32,16 +43,8 @@ public class TransfertActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transfert);
 
-        Intent intent_receive = getIntent();
-        if(intent_receive != null){
-            if(intent_receive.hasExtra("solde")
-                    && intent_receive.hasExtra("revenu")
-                    && intent_receive.hasExtra("depense")){
-                Solde = Integer.parseInt(intent_receive.getStringExtra("solde"));
-                Revenus = Integer.parseInt(intent_receive.getStringExtra("revenu"));
-                Depenses = Integer.parseInt(intent_receive.getStringExtra("depense"));
-            }
-        }
+        myDBCompte = new DBCompteAdapter(this);
+        myDBTransfert = new DBTransfertAdapter(this);
 
         // calender class's instance and get current date, month, year, hour and minute from calender
         final Calendar c = Calendar.getInstance();
@@ -53,6 +56,9 @@ public class TransfertActivity extends AppCompatActivity {
 
         // initialiser l'EditText etn_montant
         etn_montant = findViewById(R.id.etn_montant);
+
+        // initialiser l'EditText description
+        description = findViewById(R.id.description);
 
         // initiate the date picker and a button
         date = findViewById(R.id.date);
@@ -69,10 +75,10 @@ public class TransfertActivity extends AppCompatActivity {
         IB_valider = findViewById(R.id.btn_valider);
 
         // Initialisation du spinner du compte source
-        Spinner spinner_compte_source = findViewById(R.id.spinner_compte_source);
+        spinner_compte_source = findViewById(R.id.spinner_compte_source);
 
         // Initialisation du spinner du compte destination
-        Spinner spinner_compte_destination = findViewById(R.id.spinner_compte_destination);
+        spinner_compte_destination = findViewById(R.id.spinner_compte_destination);
 
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter_compte_source = ArrayAdapter.createFromResource(getApplicationContext(),
@@ -84,7 +90,13 @@ public class TransfertActivity extends AppCompatActivity {
         AdapterView.OnItemSelectedListener l_compte_source = new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+                selectedCompteSource = parent.getItemAtPosition(position).toString();
+                Compte compte = myDBCompte.get_solde_compte(selectedCompteSource);
+                if (compte == null)
+                    return;
+                SoldeSource = compte.getSolde_compte();
+                RevenusSource = compte.getRevenu_compte();
+                DepensesSource = compte.getDepense_compte();
             }
 
             @Override
@@ -105,7 +117,13 @@ public class TransfertActivity extends AppCompatActivity {
         AdapterView.OnItemSelectedListener l_compte_destination = new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+                selectedCompteDestination = parent.getItemAtPosition(position).toString();
+                Compte compte = myDBCompte.get_solde_compte(selectedCompteDestination);
+                if (compte == null)
+                    return;
+                SoldeDestination = compte.getSolde_compte();
+                RevenusDestination = compte.getRevenu_compte();
+                DepensesDestination = compte.getDepense_compte();
             }
 
             @Override
@@ -153,6 +171,44 @@ public class TransfertActivity extends AppCompatActivity {
                 Toast toast = Toast.makeText(getApplicationContext(), "Entrez un montant valide", Toast.LENGTH_SHORT);
                 toast.setGravity(Gravity.BOTTOM, 0, 0);
                 toast.show();
+            }
+            else if(description.getText().toString().equals("")){
+                Toast toast = Toast.makeText(getApplicationContext(), "Entrez une brève description", Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.BOTTOM, 0, 0);
+                toast.show();
+            }
+            else{
+                int transfert = Integer.parseInt(montant_transfert);
+                if (transfert > SoldeSource){
+                    Toast toast = Toast.makeText(getApplicationContext(), "Votre solde est insuffisant", Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.BOTTOM, 0, 0);
+                    toast.show();
+                    etn_montant.setText("0");
+                    return;
+                }
+                DepensesSource += transfert;
+                SoldeSource -= transfert;
+
+                RevenusDestination += transfert;
+                SoldeDestination += transfert;
+
+                Transfert transfert1 = new Transfert();
+                transfert1.setMontant(transfert);
+                transfert1.setDate(date.getText().toString());
+                transfert1.setHeure(time.getText().toString());
+                transfert1.setNom_compte_source(selectedCompteSource);
+                transfert1.setNom_compte_destination(selectedCompteDestination);
+                transfert1.setDesc(description.getText().toString());
+
+                Intent intent_send = new Intent(getApplicationContext(), HomeActivity.class);
+                intent_send.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+                myDBCompte.update_solde_compte(selectedCompteSource, SoldeSource, RevenusSource, DepensesSource);
+                myDBCompte.update_solde_compte(selectedCompteDestination, SoldeDestination, RevenusDestination, DepensesDestination);
+                myDBTransfert.insert_transfert(transfert1);
+
+                startActivity(intent_send);
+                finish();
             }
         });
 

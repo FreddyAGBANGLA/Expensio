@@ -59,6 +59,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         switch (id){
             case R.id.drawer_home :
                 getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new AccueilFragment()).commit();
+                navigationView.setCheckedItem(R.id.drawer_home);
+                break;
+            case R.id.drawer_history:
+                getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new HistoryFragment()).commit();
+                navigationView.setCheckedItem(R.id.drawer_history);
                 break;
             case R.id.drawer_profil:
                 break;

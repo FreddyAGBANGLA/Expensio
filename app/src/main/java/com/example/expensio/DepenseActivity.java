@@ -16,21 +16,25 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.expensio.Model.Compte;
-import com.example.expensio.Utils.GestDataBase;
+import com.example.expensio.Model.Depense;
+import com.example.expensio.Utils.DBCompteAdapter;
+import com.example.expensio.Utils.DBDepenseAdapter;
 
 import java.util.Calendar;
 
 import soup.neumorphism.NeumorphButton;
 
 public class DepenseActivity extends AppCompatActivity {
-    GestDataBase myDB;
-    EditText date, time, etn_montant;
+    DBCompteAdapter myDBCompte = null;
+    DBDepenseAdapter myDBDepense = null;
+    EditText date, time, etn_montant, description;
     NeumorphButton IB_valider;
     DatePickerDialog datePickerDialog;
     TimePickerDialog timePickerDialog;
     Spinner spinner_compte, spinner_categorie_depense;
-    String selectedCompte;
+    String selectedCompte, selectedCategorie, globaCompte = "Compte Global";
     int Solde = 0, Revenus = 0, Depenses = 0;
+    int globaSolde = 0, globaRevenus = 0, globaDepenses = 0;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -38,22 +42,8 @@ public class DepenseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_depense);
 
-        myDB = new GestDataBase(this);
-
-        /*
-        Intent intent_receive = getIntent();
-        if(intent_receive != null){
-            if(intent_receive.hasExtra("solde")
-                    && intent_receive.hasExtra("revenu")
-                    && intent_receive.hasExtra("depense")){
-                Solde = Integer.parseInt(intent_receive.getStringExtra("solde"));
-                Revenus = Integer.parseInt(intent_receive.getStringExtra("revenu"));
-                Depenses = Integer.parseInt(intent_receive.getStringExtra("depense"));
-            }
-        }
-
-         */
-
+        myDBCompte = new DBCompteAdapter(this);
+        myDBDepense = new DBDepenseAdapter(this);
 
         // calender class's instance and get current date, month, year, hour and minute from calender
         final Calendar c = Calendar.getInstance();
@@ -65,6 +55,9 @@ public class DepenseActivity extends AppCompatActivity {
 
         // initialiser l'EditText etn_montant
         etn_montant = findViewById(R.id.etn_montant);
+
+        // initialiser l'EditText description
+        description = findViewById(R.id.description);
 
         // initiate the date picker and a button
         date = findViewById(R.id.date);
@@ -99,12 +92,18 @@ public class DepenseActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 selectedCompte = parent.getItemAtPosition(position).toString();
-                Compte compte = myDB.get_solde_compte(selectedCompte);
+                Compte compte = myDBCompte.get_solde_compte(selectedCompte);
                 if (compte == null)
                     return;
                 Solde = compte.getSolde_compte();
                 Revenus = compte.getRevenu_compte();
                 Depenses = compte.getDepense_compte();
+                Compte compteGlobal = myDBCompte.get_solde_compte(globaCompte);
+                if(compteGlobal == null)
+                    return;
+                globaSolde = compteGlobal.getSolde_compte();
+                globaRevenus = compteGlobal.getRevenu_compte();
+                globaDepenses = compteGlobal.getDepense_compte();
             }
 
             @Override
@@ -125,7 +124,7 @@ public class DepenseActivity extends AppCompatActivity {
         AdapterView.OnItemSelectedListener l_categorie = new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+                selectedCategorie = parent.getItemAtPosition(position).toString();
             }
 
             @Override
@@ -185,29 +184,27 @@ public class DepenseActivity extends AppCompatActivity {
                 }
                 Depenses += depense;
                 Solde -= depense;
+                globaDepenses += depense;
+                globaSolde -= depense;
+
+                Depense depense1 = new Depense();
+                depense1.setMontant(depense);
+                depense1.setCategorie(selectedCategorie);
+                depense1.setDate(date.getText().toString());
+                depense1.setHeure(time.getText().toString());
+                depense1.setDesc(description.getText().toString());
+                depense1.setNom_compte(selectedCompte);
 
                 Intent intent_send = new Intent(getApplicationContext(), HomeActivity.class);
                 intent_send.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
-                Boolean checkupdatedata = myDB.update_solde_compte(selectedCompte, Solde, Revenus, Depenses);
-                if(!checkupdatedata){
-                    Compte compte = new Compte();
-                    compte.setNom_compte(selectedCompte);
-                    compte.setSolde_compte(Solde);
-                    compte.setRevenu_compte(Revenus);
-                    compte.setDepense_compte(Depenses);
-                    myDB.insert_compte(compte);
-                }
+                myDBCompte.update_solde_compte(selectedCompte, Solde, Revenus, Depenses);
+                myDBCompte.update_solde_compte(globaCompte, globaSolde, globaRevenus, globaDepenses);
+                myDBDepense.insert_depense(depense1);
 
-                /*
-                // Bundle is optional
-                Bundle bundle = new Bundle();
-                bundle.putString("solde", String.valueOf(Solde));
-                bundle.putString("revenu", String.valueOf(Revenus));
-                bundle.putString("depense", String.valueOf(Depenses));
-                intent_send.putExtras(bundle);
-
-                 */
+                Toast toast = Toast.makeText(getApplicationContext(), "Données sauvegardées avec succès !", Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.BOTTOM, 0, 0);
+                toast.show();
 
                 startActivity(intent_send);
                 finish();

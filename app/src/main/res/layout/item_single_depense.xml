@@ -1,6 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="6dp"
+    android:layout_marginTop="6dp"
+    android:layout_marginLeft="6dp"
+    android:layout_marginRight="6dp"
+    android:orientation="vertical">
+
+    <soup.neumorphism.NeumorphTextView
+        android:id="@+id/view_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/type"
+        android:fontFamily="@font/nasalization"
+        android:textSize="18sp"
+        android:textColor="@color/red"/>
+
+    <soup.neumorphism.NeumorphTextView
+        android:id="@+id/view_date_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/date_et_heure"
+        android:fontFamily="@font/nasalization"
+        android:textSize="@dimen/item_text_size" />
+
+    <soup.neumorphism.NeumorphTextView
+        android:id="@+id/view_nom_compte"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/nom_du_compte"
+        android:fontFamily="@font/nasalization"
+        android:textSize="@dimen/item_text_size" />
+
+    <soup.neumorphism.NeumorphTextView
+        android:id="@+id/view_montant"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/montant"
+        android:fontFamily="@font/nasalization"
+        android:textSize="@dimen/item_text_size" />
+
+    <soup.neumorphism.NeumorphTextView
+        android:id="@+id/view_categorie"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cat_gorie"
+        android:textStyle="bold"
+        android:fontFamily="@font/nasalization"
+        android:textSize="@dimen/item_text_size" />
+
+    <soup.neumorphism.NeumorphTextView
+        android:id="@+id/view_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/description"
+        android:fontFamily="@font/nasalization"
+        android:textSize="@dimen/item_text_size" />
+
+    <!--
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <soup.neumorphism.NeumorphTextView
+            android:id="@+id/view_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/type"
+            android:fontFamily="@font/nasalization"
+            android:textSize="@dimen/item_text_size" />
+
+        <soup.neumorphism.NeumorphTextView
+            android:id="@+id/view_categorie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cat_gorie"
+            android:fontFamily="@font/nasalization"
+            android:textSize="@dimen/item_text_size" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="50dp">
+
+        <soup.neumorphism.NeumorphTextView
+            android:id="@+id/view_montant"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/montant"
+            android:fontFamily="@font/nasalization"
+            android:textSize="@dimen/item_text_size" />
+
+        <soup.neumorphism.NeumorphTextView
+            android:id="@+id/view_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/description"
+            android:fontFamily="@font/nasalization"
+            android:textSize="@dimen/item_text_size" />
+
+    </LinearLayout>-->
 
 </LinearLayout>

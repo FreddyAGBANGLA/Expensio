@@ -2,22 +2,25 @@ package com.example.expensio;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
-import android.view.animation.AnimationUtils;
 import android.view.animation.ScaleAnimation;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.time.Duration;
+import com.example.expensio.Model.Compte;
+import com.example.expensio.Utils.DBCompteAdapter;
 
 public class MainActivity extends AppCompatActivity {
+    DBCompteAdapter myDBCompte = null;
 //    Animation anim;
     ImageView logo_expensio;
     TextView text1,text2,text3,text4,text5,text6,text7,text8;
@@ -34,6 +37,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         logo_expensio=findViewById(R.id.logo_expensio); // Declare an imageView to show the animation.
+
+        myDBCompte = new DBCompteAdapter(this);
+
+        this.loadDataBaseParameters();
+
         /*anim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade); // Create the animation.
         anim.setAnimationListener(new Animation.AnimationListener() {
             @Override
@@ -220,5 +228,23 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         },5000);
+    }
+
+    void loadDataBaseParameters(){
+        SharedPreferences sharedPreferences = this.getSharedPreferences("databaseParameters", Context.MODE_PRIVATE);
+        String[] noms_comptes = {"Compte Mobile Money", "Compte bancaire", "Carte de crédit", "Compte en ligne", "Espèces", "Compte Global"};
+
+        if(sharedPreferences != null){
+            if(!sharedPreferences.getBoolean("isDataBaseCreated", false)){
+                Compte compte = new Compte();
+                for (String nom_compte: noms_comptes) {
+                    compte.setNom_compte(nom_compte);
+                    myDBCompte.insert_compte(compte);
+                }
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putBoolean("isDataBaseCreated", true);
+                editor.apply();
+            }
+        }
     }
     }

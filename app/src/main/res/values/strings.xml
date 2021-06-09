@@ -103,7 +103,33 @@
     <string name="solde">Solde</string>
     <string name="breve_description">Donnez une brève Description</string>
     <string name="valider">Valider</string>
+    <string name="historique">Historique des enregistrements</string>
+    <string name="montant">Montant</string>
+    <string name="description">Description</string>
+    <string name="cat_gorie">Catégorie</string>
+    <string name="type">Type</string>
+    <string name="revenu">Revenu</string>
+    <string name="date_et_heure">Date et Heure</string>
+    <string name="nom_du_compte">Nom du compte</string>
+    <string name="depense">Dépense</string>
+    <string name="title_spinner_compte">Votre Compte</string>
+    <string name="selection_compte">Selectionnez le compte</string>
+    <string name="selection_compte_source">Compte Source</string>
+    <string name="selection_categorie_revenu">Categorie de revenu</string>
+    <string name="selection_categorie_depense">Categorie de dépense</string>
+    <string name="selection_compte_destination">Compte Destination</string>
+    <string name="transfert1">Transfert</string>
+    <string name="date_debut">Date de début</string>
+    <string name="date_fin">Date de fin</string>
 
+    <string-array name="compte_array1">
+        <item>Compte Mobile Money</item>
+        <item>Compte bancaire</item>
+        <item>Carte de crédit</item>
+        <item>Compte en ligne</item>
+        <item>Espèces</item>
+        <item>Compte Global</item>
+    </string-array>
     <string-array name="compte_array">
         <item>Compte Mobile Money</item>
         <item>Compte bancaire</item>
@@ -111,7 +137,9 @@
         <item>Compte en ligne</item>
         <item>Espèces</item>
     </string-array>
+
     <string-array name="categorie_array_depense">
+        <item>Autres</item>
         <item>Nourriture</item>
         <item>Education</item>
         <item>Animaux</item>
@@ -130,5 +158,10 @@
         <item>Cryptomonnaie</item>
         <item>Dividendes</item>
         <item>Intérêts</item>
+    </string-array>
+    <string-array name="type_transtaction">
+        <item>Revenus</item>
+        <item>Dépenses</item>
+        <item>Transferts</item>
     </string-array>
 </resources>
